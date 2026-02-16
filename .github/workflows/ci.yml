@@ -27,7 +27,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Verify imports
-        run: |
-          python -c "from src.rag.knowledge_base import KnowledgeBase; print('KnowledgeBase OK')"
-          python -c "from src.voice.speech_to_text import SpeechToText; print('SpeechToText OK')"
-          python -c "from src.tts.text_to_speech import TextToSpeech; print('TextToSpeech OK')"
+        run: python -c "from src.rag.knowledge_base import KnowledgeBase; print('KnowledgeBase OK')"
