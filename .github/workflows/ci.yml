@@ -26,5 +26,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Verify imports
-        run: python -c "from src.rag.knowledge_base import KnowledgeBase; print('KnowledgeBase OK')"
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
