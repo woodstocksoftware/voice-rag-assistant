@@ -23,16 +23,13 @@ def _make_kb(chroma_tmp_dir, mock_anthropic_client, collection_name="test_kb"):
     Build a KnowledgeBase that uses a temp ChromaDB directory and a mocked
     Claude client, without triggering the real Anthropic() constructor.
     """
-    with patch("src.rag.knowledge_base.Anthropic") as MockAnthropic:
-        MockAnthropic.return_value = mock_anthropic_client
+    # Create real ChromaDB client BEFORE patching so we get a real client, not a mock
+    real_client = chromadb.PersistentClient(path=chroma_tmp_dir)
 
-        # Patch PersistentClient to use our temp dir
-        with patch("src.rag.knowledge_base.chromadb.PersistentClient") as MockPersistent:
-            real_client = chromadb.PersistentClient(path=chroma_tmp_dir)
-            MockPersistent.return_value = real_client
-
-            from src.rag.knowledge_base import KnowledgeBase
-            kb = KnowledgeBase(collection_name=collection_name)
+    with patch("src.rag.knowledge_base.chromadb.PersistentClient", return_value=real_client), \
+         patch("src.rag.knowledge_base.Anthropic", return_value=mock_anthropic_client):
+        from src.rag.knowledge_base import KnowledgeBase
+        kb = KnowledgeBase(collection_name=collection_name)
 
     # After construction, kb.chroma_client, kb.collection, kb.claude are all
     # wired up (collection is real ChromaDB, claude is mock).
