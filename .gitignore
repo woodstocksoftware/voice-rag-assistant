@@ -5,3 +5,14 @@ __pycache__/
 .DS_Store
 data/chroma/
 *.mp3
+
+# Build/test artifacts
+report/
+coverage/
+.coverage
+.coverage.*
+htmlcov/
+.firecrawl/
+*.tsbuildinfo
+.claude/settings.local.json
+.claude/worktrees/
