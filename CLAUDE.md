@@ -1,7 +1,7 @@
 # CLAUDE.md — Voice RAG Assistant
 
 > **Purpose:** Voice-powered RAG — speak a question, get a spoken answer from a knowledge base
-> **Owner:** Jim Williams - Woodstock Software LLC
+> **Owner:** Jim Williams - Desert's Edge Solutions LLC
 > **Repo:** woodstocksoftware/voice-rag-assistant (public)
 
 ---
